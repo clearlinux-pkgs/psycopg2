@@ -4,7 +4,7 @@
 #
 Name     : psycopg2
 Version  : 2.6.1
-Release  : 6
+Release  : 7
 URL      : https://pypi.python.org/packages/source/p/psycopg2/psycopg2-2.6.1.tar.gz
 Source0  : https://pypi.python.org/packages/source/p/psycopg2/psycopg2-2.6.1.tar.gz
 Summary  : psycopg2 - Python-PostgreSQL Database Adapter
