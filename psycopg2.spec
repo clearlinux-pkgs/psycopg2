@@ -4,7 +4,7 @@
 #
 Name     : psycopg2
 Version  : 2.6.2
-Release  : 18
+Release  : 19
 URL      : http://pypi.debian.net/psycopg2/psycopg2-2.6.2.tar.gz
 Source0  : http://pypi.debian.net/psycopg2/psycopg2-2.6.2.tar.gz
 Summary  : psycopg2 - Python-PostgreSQL Database Adapter
