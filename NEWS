@@ -1,6 +1,122 @@
 Current release
 ---------------
 
+What's new in psycopg 2.7.3
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Restored default :sql:`timestamptz[]` typecasting to Python `!datetime`.
+  Regression introduced in Psycopg 2.7.2 (:ticket:`#578`).
+
+
+What's new in psycopg 2.7.2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Fixed inconsistent state in externally closed connections
+  (:tickets:`#263, #311, #443`). Was fixed in 2.6.2 but not included in
+  2.7 by mistake.
+- Fixed Python exceptions propagation in green callback (:ticket:`#410`).
+- Don't display the password in `connection.dsn` when the connection
+  string is specified as an URI (:ticket:`#528`).
+- Return objects with timezone parsing "infinity" :sql:`timestamptz`
+  (:ticket:`#536`).
+- Dropped dependency on VC9 runtime on Windows binary packages
+  (:ticket:`#541`).
+- Fixed segfault in `~connection.lobject()` when *mode*\=\ `!None`
+  (:ticket:`#544`).
+- Fixed `~connection.lobject()` keyword argument *lobject_factory*
+  (:ticket:`#545`).
+- Fixed `~psycopg2.extras.ReplicationCursor.consume_stream()`
+  *keepalive_interval* argument (:ticket:`#547`).
+- Maybe fixed random import error on Python 3.6 in multiprocess
+  environment (:ticket:`#550`).
+- Fixed random `!SystemError` upon receiving abort signal (:ticket:`#551`).
+- Accept `~psycopg2.sql.Composable` objects in
+  `~psycopg2.extras.ReplicationCursor.start_replication_expert()`
+  (:ticket:`554`).
+- Parse intervals returned as microseconds from Redshift (:ticket:`#558`).
+- Added `~psycopg2.extras.Json` `!prepare()` method to consider connection
+  params when adapting (:ticket:`#562`).
+- `~psycopg2.errorcodes` map updated to PostgreSQL 10 beta 1.
+
+
+What's new in psycopg 2.7.1
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Ignore `!None` arguments passed to `~psycopg2.connect()` and
+  `~psycopg2.extensions.make_dsn()` (:ticket:`#517`).
+- OpenSSL upgraded from major version 0.9.8 to 1.0.2 in the Linux wheel
+  packages (:ticket:`#518`).
+- Fixed build with libpq versions < 9.3 (:ticket:`#520`).
+
+
+What's new in psycopg 2.7
+-------------------------
+
+New features:
+
+- Added `~psycopg2.sql` module to generate SQL dynamically (:ticket:`#308`).
+- Added :ref:`replication-support` (:ticket:`#322`). Main authors are
+  Oleksandr Shulgin and Craig Ringer, who deserve a huge thank you.
+- Added `~psycopg2.extensions.parse_dsn()` and
+  `~psycopg2.extensions.make_dsn()` functions (:tickets:`#321, #363`).
+  `~psycopg2.connect()` now can take both *dsn* and keyword arguments, merging
+  them together.
+- Added `~psycopg2.__libpq_version__` and
+  `~psycopg2.extensions.libpq_version()` to inspect the version of the
+  ``libpq`` library the module was compiled/loaded with
+  (:tickets:`#35, #323`).
+- The attributes `~connection.notices` and `~connection.notifies` can be
+  customized replacing them with any object exposing an `!append()` method
+  (:ticket:`#326`).
+- Adapt network types to `ipaddress` objects when available. When not
+  enabled, convert arrays of network types to lists by default. The old `!Inet`
+  adapter is deprecated (:tickets:`#317, #343, #387`).
+- Added `~psycopg2.extensions.quote_ident()` function (:ticket:`#359`).
+- Added `~connection.get_dsn_parameters()` connection method (:ticket:`#364`).
+- `~cursor.callproc()` now accepts a dictionary of parameters (:ticket:`#381`).
+- Give precedence to `!__conform__()` over superclasses to choose an object
+  adapter (:ticket:`#456`).
+- Using Python C API decoding functions and codecs caching for faster
+  unicode encoding/decoding (:ticket:`#473`).
+- `~cursor.executemany()` slowness addressed by
+  `~psycopg2.extras.execute_batch()` and `~psycopg2.extras.execute_values()`
+  (:ticket:`#491`).
+- Added ``async_`` as an alias for ``async`` to support Python 3.7 where
+  ``async`` will become a keyword (:ticket:`#495`).
+- Unless in autocommit, do not use :sql:`default_transaction_*` settings to
+  control the session characteristics as it may create problems with external
+  connection pools such as pgbouncer; use :sql:`BEGIN` options instead
+  (:ticket:`#503`).
+- `~connection.isolation_level` is now writable and entirely separated from
+  `~connection.autocommit`; added `~connection.readonly`,
+  `~connection.deferrable` writable attributes.
+
+Bug fixes:
+
+- Fixed error caused by missing decoding `~psycopg2.extras.LoggingConnection`
+  (:ticket:`#483`).
+- Fixed integer overflow in :sql:`interval` seconds (:ticket:`#512`).
+
+Other changes:
+
+- Dropped support for Python 2.5 and 3.1.
+- Dropped support for client library older than PostgreSQL 9.1 (but older
+  server versions are still supported).
+- `~connection.isolation_level` doesn't read from the database but will return
+  `~psycopg2.extensions.ISOLATION_LEVEL_DEFAULT` if no value was set on the
+  connection.
+- Empty arrays no more converted into lists if they don't have a type attached
+  (:ticket:`#506`)
+
+
+What's new in psycopg 2.6.3
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Throw an exception trying to pass ``NULL`` chars as parameters
+  (:ticket:`#420`).
+- Make `~psycopg2.extras.Range` objects picklable (:ticket:`#462`).
+
+
 What's new in psycopg 2.6.2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
