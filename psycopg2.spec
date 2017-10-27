@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x6013BD3AFCF957DE (daniele.varrazzo@gmail.com)
 #
 Name     : psycopg2
-Version  : 2.7.3.1
-Release  : 27
-URL      : http://pypi.debian.net/psycopg2/psycopg2-2.7.3.1.tar.gz
-Source0  : http://pypi.debian.net/psycopg2/psycopg2-2.7.3.1.tar.gz
-Source99 : http://pypi.debian.net/psycopg2/psycopg2-2.7.3.1.tar.gz.asc
+Version  : 2.7.3.2
+Release  : 28
+URL      : http://pypi.debian.net/psycopg2/psycopg2-2.7.3.2.tar.gz
+Source0  : http://pypi.debian.net/psycopg2/psycopg2-2.7.3.2.tar.gz
+Source99 : http://pypi.debian.net/psycopg2/psycopg2-2.7.3.2.tar.gz.asc
 Summary  : psycopg2 - Python-PostgreSQL Database Adapter
 Group    : Development/Tools
 License  : LGPL-3.0 ZPL-2.0
@@ -76,19 +76,19 @@ python3 components for the psycopg2 package.
 
 
 %prep
-%setup -q -n psycopg2-2.7.3.1
+%setup -q -n psycopg2-2.7.3.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1507168697
+export SOURCE_DATE_EPOCH=1509104169
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1507168697
+export SOURCE_DATE_EPOCH=1509104169
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
