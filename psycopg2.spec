@@ -20,7 +20,7 @@ Requires: Sphinx
 BuildRequires : pbr
 BuildRequires : pip
 BuildRequires : postgresql-dev
-BuildRequires : python-dev
+
 BuildRequires : python3-dev
 BuildRequires : setuptools
 
