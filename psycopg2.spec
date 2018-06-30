@@ -6,7 +6,7 @@
 #
 Name     : psycopg2
 Version  : 2.7.3.2
-Release  : 38
+Release  : 39
 URL      : http://pypi.debian.net/psycopg2/psycopg2-2.7.3.2.tar.gz
 Source0  : http://pypi.debian.net/psycopg2/psycopg2-2.7.3.2.tar.gz
 Source99 : http://pypi.debian.net/psycopg2/psycopg2-2.7.3.2.tar.gz.asc
@@ -14,15 +14,19 @@ Summary  : psycopg2 - Python-PostgreSQL Database Adapter
 Group    : Development/Tools
 License  : LGPL-3.0 ZPL-2.0
 Requires: psycopg2-python3
+Requires: psycopg2-license
 Requires: psycopg2-python
 Requires: Pygments
 Requires: Sphinx
 BuildRequires : pbr
 BuildRequires : pip
 BuildRequires : postgresql-dev
-
+BuildRequires : python-core
+BuildRequires : python-dev
+BuildRequires : python3-core
 BuildRequires : python3-dev
 BuildRequires : setuptools
+BuildRequires : setuptools-legacypython
 
 %description
 programming language.  Its main features are the complete implementation of
@@ -55,6 +59,14 @@ Requires: python-core
 legacypython components for the psycopg2 package.
 
 
+%package license
+Summary: license components for the psycopg2 package.
+Group: Default
+
+%description license
+license components for the psycopg2 package.
+
+
 %package python
 Summary: python components for the psycopg2 package.
 Group: Default
@@ -81,13 +93,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1528574074
+export SOURCE_DATE_EPOCH=1530382354
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1528574074
+export SOURCE_DATE_EPOCH=1530382354
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/psycopg2
+cp LICENSE %{buildroot}/usr/share/doc/psycopg2/LICENSE
+cp doc/COPYING.LESSER %{buildroot}/usr/share/doc/psycopg2/doc_COPYING.LESSER
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
 echo ----[ mark ]----
@@ -100,6 +115,11 @@ echo ----[ mark ]----
 %files legacypython
 %defattr(-,root,root,-)
 /usr/lib/python2*/*
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/psycopg2/LICENSE
+/usr/share/doc/psycopg2/doc_COPYING.LESSER
 
 %files python
 %defattr(-,root,root,-)
