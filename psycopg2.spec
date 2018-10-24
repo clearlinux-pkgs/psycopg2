@@ -6,7 +6,7 @@
 #
 Name     : psycopg2
 Version  : 2.7.5
-Release  : 43
+Release  : 44
 URL      : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz
 Source0  : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz
 Source99 : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz.asc
