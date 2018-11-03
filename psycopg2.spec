@@ -6,27 +6,23 @@
 #
 Name     : psycopg2
 Version  : 2.7.5
-Release  : 44
+Release  : 45
 URL      : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz
 Source0  : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz
 Source99 : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz.asc
 Summary  : psycopg2 - Python-PostgreSQL Database Adapter
 Group    : Development/Tools
 License  : LGPL-3.0 ZPL-2.0
-Requires: psycopg2-python3
-Requires: psycopg2-license
-Requires: psycopg2-python
+Requires: psycopg2-license = %{version}-%{release}
+Requires: psycopg2-python = %{version}-%{release}
+Requires: psycopg2-python3 = %{version}-%{release}
 Requires: Pygments
 Requires: Sphinx
-BuildRequires : pbr
-BuildRequires : pip
+BuildRequires : buildreq-distutils23
+BuildRequires : buildreq-distutils3
 BuildRequires : postgresql-dev
-BuildRequires : python-core
 BuildRequires : python-dev
-BuildRequires : python3-core
 BuildRequires : python3-dev
-BuildRequires : setuptools
-BuildRequires : setuptools-legacypython
 
 %description
 programming language.  Its main features are the complete implementation of
@@ -70,7 +66,7 @@ license components for the psycopg2 package.
 %package python
 Summary: python components for the psycopg2 package.
 Group: Default
-Requires: psycopg2-python3
+Requires: psycopg2-python3 = %{version}-%{release}
 
 %description python
 python components for the psycopg2 package.
@@ -93,16 +89,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1531009471
+export SOURCE_DATE_EPOCH=1541271700
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1531009471
+export SOURCE_DATE_EPOCH=1541271700
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/psycopg2
-cp LICENSE %{buildroot}/usr/share/doc/psycopg2/LICENSE
-cp doc/COPYING.LESSER %{buildroot}/usr/share/doc/psycopg2/doc_COPYING.LESSER
+mkdir -p %{buildroot}/usr/share/package-licenses/psycopg2
+cp LICENSE %{buildroot}/usr/share/package-licenses/psycopg2/LICENSE
+cp doc/COPYING.LESSER %{buildroot}/usr/share/package-licenses/psycopg2/doc_COPYING.LESSER
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
 echo ----[ mark ]----
@@ -117,9 +113,9 @@ echo ----[ mark ]----
 /usr/lib/python2*/*
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/psycopg2/LICENSE
-/usr/share/doc/psycopg2/doc_COPYING.LESSER
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/psycopg2/LICENSE
+/usr/share/package-licenses/psycopg2/doc_COPYING.LESSER
 
 %files python
 %defattr(-,root,root,-)
