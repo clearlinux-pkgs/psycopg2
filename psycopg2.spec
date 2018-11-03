@@ -6,7 +6,7 @@
 #
 Name     : psycopg2
 Version  : 2.7.5
-Release  : 45
+Release  : 46
 URL      : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz
 Source0  : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz
 Source99 : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz.asc
@@ -16,8 +16,6 @@ License  : LGPL-3.0 ZPL-2.0
 Requires: psycopg2-license = %{version}-%{release}
 Requires: psycopg2-python = %{version}-%{release}
 Requires: psycopg2-python3 = %{version}-%{release}
-Requires: Pygments
-Requires: Sphinx
 BuildRequires : buildreq-distutils23
 BuildRequires : buildreq-distutils3
 BuildRequires : postgresql-dev
@@ -89,12 +87,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541271700
+export SOURCE_DATE_EPOCH=1541277137
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1541271700
+export SOURCE_DATE_EPOCH=1541277137
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/psycopg2
 cp LICENSE %{buildroot}/usr/share/package-licenses/psycopg2/LICENSE
