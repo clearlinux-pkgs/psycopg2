@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x6013BD3AFCF957DE (daniele.varrazzo@gmail.com)
 #
 Name     : psycopg2
-Version  : 2.7.5
-Release  : 46
-URL      : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz
-Source0  : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz
-Source99 : http://pypi.debian.net/psycopg2/psycopg2-2.7.5.tar.gz.asc
+Version  : 2.7.6.1
+Release  : 47
+URL      : https://files.pythonhosted.org/packages/c0/07/93573b97ed61b6fb907c8439bf58f09957564cf7c39612cef36c547e68c6/psycopg2-2.7.6.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/c0/07/93573b97ed61b6fb907c8439bf58f09957564cf7c39612cef36c547e68c6/psycopg2-2.7.6.1.tar.gz
+Source99 : https://files.pythonhosted.org/packages/c0/07/93573b97ed61b6fb907c8439bf58f09957564cf7c39612cef36c547e68c6/psycopg2-2.7.6.1.tar.gz.asc
 Summary  : psycopg2 - Python-PostgreSQL Database Adapter
 Group    : Development/Tools
 License  : LGPL-3.0 ZPL-2.0
@@ -80,19 +80,19 @@ python3 components for the psycopg2 package.
 
 
 %prep
-%setup -q -n psycopg2-2.7.5
+%setup -q -n psycopg2-2.7.6.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1541277137
+export SOURCE_DATE_EPOCH=1542040260
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1541277137
+export SOURCE_DATE_EPOCH=1542040260
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/psycopg2
 cp LICENSE %{buildroot}/usr/share/package-licenses/psycopg2/LICENSE
