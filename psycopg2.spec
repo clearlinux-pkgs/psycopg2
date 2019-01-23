@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x6013BD3AFCF957DE (daniele.varrazzo@gmail.com)
 #
 Name     : psycopg2
-Version  : 2.7.6.1
-Release  : 48
-URL      : https://files.pythonhosted.org/packages/c0/07/93573b97ed61b6fb907c8439bf58f09957564cf7c39612cef36c547e68c6/psycopg2-2.7.6.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/c0/07/93573b97ed61b6fb907c8439bf58f09957564cf7c39612cef36c547e68c6/psycopg2-2.7.6.1.tar.gz
-Source99 : https://files.pythonhosted.org/packages/c0/07/93573b97ed61b6fb907c8439bf58f09957564cf7c39612cef36c547e68c6/psycopg2-2.7.6.1.tar.gz.asc
+Version  : 2.7.7
+Release  : 49
+URL      : https://files.pythonhosted.org/packages/63/54/c039eb0f46f9a9406b59a638415c2012ad7be9b4b97bfddb1f48c280df3a/psycopg2-2.7.7.tar.gz
+Source0  : https://files.pythonhosted.org/packages/63/54/c039eb0f46f9a9406b59a638415c2012ad7be9b4b97bfddb1f48c280df3a/psycopg2-2.7.7.tar.gz
+Source99 : https://files.pythonhosted.org/packages/63/54/c039eb0f46f9a9406b59a638415c2012ad7be9b4b97bfddb1f48c280df3a/psycopg2-2.7.7.tar.gz.asc
 Summary  : psycopg2 - Python-PostgreSQL Database Adapter
 Group    : Development/Tools
 License  : LGPL-3.0 ZPL-2.0
@@ -23,26 +23,12 @@ BuildRequires : python-dev
 BuildRequires : python3-dev
 
 %description
-programming language.  Its main features are the complete implementation of
-        the Python DB API 2.0 specification and the thread safety (several threads can
-        share the same connection).  It was designed for heavily multi-threaded
-        applications that create and destroy lots of cursors and make a large number
-        of concurrent "INSERT"s or "UPDATE"s.
-        
-        Psycopg 2 is mostly implemented in C as a libpq wrapper, resulting in being
-        both efficient and secure.  It features client-side and server-side cursors,
-        asynchronous communication and notifications, "COPY TO/COPY FROM" support.
-        Many Python types are supported out-of-the-box and adapted to matching
-        PostgreSQL data types; adaptation can be extended and customized thanks to a
-        flexible objects adaptation system.
-        
-        Psycopg 2 is both Unicode and Python 3 friendly.
-        
-        
-        Documentation
-        -------------
-        
-        Documentation is included in the ``doc`` directory and is `available online`__.
+How to build psycopg documentation
+----------------------------------
+Building the documentation usually requires building the library too for
+introspection, so you will need the same prerequisites_.  The only extra
+prerequisite is virtualenv_: the packages needed to build the docs will be
+installed when building the env.
 
 %package legacypython
 Summary: legacypython components for the psycopg2 package.
@@ -80,19 +66,19 @@ python3 components for the psycopg2 package.
 
 
 %prep
-%setup -q -n psycopg2-2.7.6.1
+%setup -q -n psycopg2-2.7.7
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1542040260
+export SOURCE_DATE_EPOCH=1548256768
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1542040260
+export SOURCE_DATE_EPOCH=1548256768
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/psycopg2
 cp LICENSE %{buildroot}/usr/share/package-licenses/psycopg2/LICENSE
