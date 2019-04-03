@@ -6,7 +6,7 @@
 #
 Name     : psycopg2
 Version  : 2.7.7
-Release  : 50
+Release  : 51
 URL      : https://files.pythonhosted.org/packages/63/54/c039eb0f46f9a9406b59a638415c2012ad7be9b4b97bfddb1f48c280df3a/psycopg2-2.7.7.tar.gz
 Source0  : https://files.pythonhosted.org/packages/63/54/c039eb0f46f9a9406b59a638415c2012ad7be9b4b97bfddb1f48c280df3a/psycopg2-2.7.7.tar.gz
 Source99 : https://files.pythonhosted.org/packages/63/54/c039eb0f46f9a9406b59a638415c2012ad7be9b4b97bfddb1f48c280df3a/psycopg2-2.7.7.tar.gz.asc
@@ -16,7 +16,6 @@ License  : LGPL-3.0 ZPL-2.0
 Requires: psycopg2-license = %{version}-%{release}
 Requires: psycopg2-python = %{version}-%{release}
 Requires: psycopg2-python3 = %{version}-%{release}
-BuildRequires : buildreq-distutils23
 BuildRequires : buildreq-distutils3
 BuildRequires : postgresql-dev
 BuildRequires : python-dev
@@ -29,15 +28,6 @@ Building the documentation usually requires building the library too for
 introspection, so you will need the same prerequisites_.  The only extra
 prerequisite is virtualenv_: the packages needed to build the docs will be
 installed when building the env.
-
-%package legacypython
-Summary: legacypython components for the psycopg2 package.
-Group: Default
-Requires: python-core
-
-%description legacypython
-legacypython components for the psycopg2 package.
-
 
 %package license
 Summary: license components for the psycopg2 package.
@@ -73,28 +63,23 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1548256768
-python2 setup.py build -b py2
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1554324690
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %install
-export SOURCE_DATE_EPOCH=1548256768
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/psycopg2
 cp LICENSE %{buildroot}/usr/share/package-licenses/psycopg2/LICENSE
 cp doc/COPYING.LESSER %{buildroot}/usr/share/package-licenses/psycopg2/doc_COPYING.LESSER
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
-
-%files legacypython
-%defattr(-,root,root,-)
-/usr/lib/python2*/*
 
 %files license
 %defattr(0644,root,root,0755)
