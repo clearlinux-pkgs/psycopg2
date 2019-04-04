@@ -1,6 +1,68 @@
 Current release
 ---------------
 
+What's new in psycopg 2.8
+-------------------------
+
+New features:
+
+- Added `~psycopg2.errors` module. Every PostgreSQL error is converted into
+  a specific exception class (:ticket:`#682`).
+- Added `~psycopg2.extensions.encrypt_password()` function (:ticket:`#576`).
+- Added `~psycopg2.extensions.BYTES` adapter to manage databases with mixed
+  encodings on Python 3 (:ticket:`#835`).
+- Added `~psycopg2.extensions.Column.table_oid` and
+  `~psycopg2.extensions.Column.table_column` attributes on `cursor.description`
+  items (:ticket:`#661`).
+- Added `connection.info` object to retrieve various PostgreSQL connection
+  information (:ticket:`#726`).
+- Added `~connection.get_native_connection()` to expose the raw ``PGconn``
+  structure to C extensions via Capsule (:ticket:`#782`).
+- Added `~connection.pgconn_ptr` and `~cursor.pgresult_ptr` to expose raw
+  C structures to Python and interact with libpq via ctypes (:ticket:`#782`).
+- `~psycopg2.sql.Identifier` can represent qualified names in SQL composition
+  (:ticket:`#732`).
+- Added `!ReplicationCursor`.\ `~psycopg2.extras.ReplicationCursor.wal_end`
+  attribute (:ticket:`#800`).
+- Added *fetch* parameter to `~psycopg2.extras.execute_values()` function
+  (:ticket:`#813`).
+- `!str()` on `~psycopg2.extras.Range` produces a human-readable representation
+  (:ticket:`#773`).
+- `~psycopg2.extras.DictCursor` and `~psycopg2.extras.RealDictCursor` rows
+  maintain columns order (:ticket:`#177`).
+- Added `~psycopg2.extensions.Diagnostics.severity_nonlocalized` attribute on
+  the `~psycopg2.extensions.Diagnostics` object (:ticket:`#783`).
+- More efficient `~psycopg2.extras.NamedTupleCursor` (:ticket:`#838`).
+
+Bug fixes:
+
+- Fixed connections occasionally broken by the unrelated use of the
+  multiprocessing module (:ticket:`#829`).
+- Fixed async communication blocking if results are returned in different
+  chunks, e.g. with notices interspersed to the results (:ticket:`#856`).
+- Fixed adaptation of numeric subclasses such as `~enum.IntEnum`
+  (:ticket:`#591`).
+
+Other changes:
+
+- Dropped support for Python 2.6, 3.2, 3.3.
+- Dropped `psycopg1` module.
+- Dropped deprecated `!register_tstz_w_secs()` (was previously a no-op).
+- Dropped deprecated `!PersistentConnectionPool`. This pool class was mostly
+  designed to interact with Zope. Use `!ZPsycopgDA.pool` instead.
+- Binary packages no longer installed by default. The 'psycopg2-binary'
+  package must be used explicitly.
+- Dropped `!PSYCOPG_DISPLAY_SIZE` build parameter.
+- Dropped support for mxDateTime as the default date and time adapter.
+  mxDatetime support continues to be available as an alternative to Python's
+  builtin datetime.
+- No longer use 2to3 during installation for Python 2 & 3 compatibility. All
+  source files are now compatible with Python 2 & 3 as is.
+- The `!psycopg2.test` package is no longer installed by ``python setup.py
+  install``.
+- Wheel package compiled against OpenSSL 1.0.2r and PostgreSQL 11.2 libpq.
+
+
 What's new in psycopg 2.7.7
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -62,9 +124,9 @@ What's new in psycopg 2.7.4
 - Fixed `~psycopg2.extras.MinTimeLoggingCursor` on Python 3 (:ticket:`#609`).
 - Fixed parsing of array of points as floats (:ticket:`#613`).
 - Fixed `~psycopg2.__libpq_version__` building with libpq >= 10.1
-  (:ticket:`632`).
+  (:ticket:`#632`).
 - Fixed `~cursor.rowcount` after `~cursor.executemany()` with :sql:`RETURNING`
-  statements (:ticket:`633`).
+  statements (:ticket:`#633`).
 - Fixed compatibility problem with pypy3 (:ticket:`#649`).
 - Wheel packages compiled against PostgreSQL 10.1 libpq and OpenSSL 1.0.2n.
 - Wheel packages for Python 2.6 no more available (support dropped from
@@ -116,7 +178,7 @@ What's new in psycopg 2.7.2
 - Fixed random `!SystemError` upon receiving abort signal (:ticket:`#551`).
 - Accept `~psycopg2.sql.Composable` objects in
   `~psycopg2.extras.ReplicationCursor.start_replication_expert()`
-  (:ticket:`554`).
+  (:ticket:`#554`).
 - Parse intervals returned as microseconds from Redshift (:ticket:`#558`).
 - Added `~psycopg2.extras.Json` `!prepare()` method to consider connection
   params when adapting (:ticket:`#562`).
@@ -361,7 +423,7 @@ Other changes:
 - Dropped support for Python 2.4. Please use Psycopg 2.4.x if you need it.
 - `~psycopg2.errorcodes` map updated to PostgreSQL 9.2.
 - Dropped Zope adapter from source repository. ZPsycopgDA now has its own
-  project at <http://github.com/psycopg/ZPsycopgDA>.
+  project at <https://github.com/psycopg/ZPsycopgDA>.
 
 
 What's new in psycopg 2.4.6
@@ -985,7 +1047,7 @@ What's new in psycopg 2.0 beta 7
 What's new in psycopg 2.0 beta 6
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Support for named cursors (see examples/fetch.py).
+* Support for named cursors.
 
 * Safer parsing of time intervals.
 
@@ -1015,7 +1077,7 @@ What's new in psycopg 2.0 beta 5
 * All classes have been renamed to exist in the psycopg2._psycopg module,
   to fix problems with automatic documentation generators like epydoc.
 
-* NOTIFY is correctly trapped (see examples/notify.py for example code.)
+* NOTIFY is correctly trapped.
 
 What's new in psycopg 2.0 beta 4
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1132,8 +1194,7 @@ What's new in psycopg 1.99.10
 What's new in psycopg 1.99.9
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* Added simple pooling code (psycopg.pool module); see the reworked
-  examples/threads.py for example code.
+* Added simple pooling code (psycopg.pool module).
 
 * Added DECIMAL typecaster to convert postgresql DECIMAL and NUMERIC
   types (i.e, all types with an OID of NUMERICOID.) Note that the

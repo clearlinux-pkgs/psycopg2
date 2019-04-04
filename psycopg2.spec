@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x6013BD3AFCF957DE (daniele.varrazzo@gmail.com)
 #
 Name     : psycopg2
-Version  : 2.7.7
-Release  : 51
-URL      : https://files.pythonhosted.org/packages/63/54/c039eb0f46f9a9406b59a638415c2012ad7be9b4b97bfddb1f48c280df3a/psycopg2-2.7.7.tar.gz
-Source0  : https://files.pythonhosted.org/packages/63/54/c039eb0f46f9a9406b59a638415c2012ad7be9b4b97bfddb1f48c280df3a/psycopg2-2.7.7.tar.gz
-Source99 : https://files.pythonhosted.org/packages/63/54/c039eb0f46f9a9406b59a638415c2012ad7be9b4b97bfddb1f48c280df3a/psycopg2-2.7.7.tar.gz.asc
+Version  : 2.8
+Release  : 52
+URL      : https://files.pythonhosted.org/packages/c7/ca/75236b17f1b951950ffc55d657c5aa408d3d0327a1b6c4c0f7cb16ef7e7b/psycopg2-2.8.tar.gz
+Source0  : https://files.pythonhosted.org/packages/c7/ca/75236b17f1b951950ffc55d657c5aa408d3d0327a1b6c4c0f7cb16ef7e7b/psycopg2-2.8.tar.gz
+Source99 : https://files.pythonhosted.org/packages/c7/ca/75236b17f1b951950ffc55d657c5aa408d3d0327a1b6c4c0f7cb16ef7e7b/psycopg2-2.8.tar.gz.asc
 Summary  : psycopg2 - Python-PostgreSQL Database Adapter
 Group    : Development/Tools
 License  : LGPL-3.0 ZPL-2.0
@@ -56,14 +56,14 @@ python3 components for the psycopg2 package.
 
 
 %prep
-%setup -q -n psycopg2-2.7.7
+%setup -q -n psycopg2-2.8
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1554324690
+export SOURCE_DATE_EPOCH=1554401221
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
@@ -71,7 +71,6 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/psycopg2
-cp LICENSE %{buildroot}/usr/share/package-licenses/psycopg2/LICENSE
 cp doc/COPYING.LESSER %{buildroot}/usr/share/package-licenses/psycopg2/doc_COPYING.LESSER
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
@@ -83,7 +82,6 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/psycopg2/LICENSE
 /usr/share/package-licenses/psycopg2/doc_COPYING.LESSER
 
 %files python
