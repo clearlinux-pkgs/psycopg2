@@ -1,5 +1,5 @@
 PKG_NAME := psycopg2
-URL = https://files.pythonhosted.org/packages/c7/ca/75236b17f1b951950ffc55d657c5aa408d3d0327a1b6c4c0f7cb16ef7e7b/psycopg2-2.8.tar.gz
+URL = https://files.pythonhosted.org/packages/52/be/f898e712f5f08131d651a62754fca82a1deb42e4e9889ad01932f770a2be/psycopg2-2.8.1.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
