@@ -2,5 +2,4 @@
 QGIS
 SQLAlchemy
 koji
-sqlalchemy-migrate
 taskflow
