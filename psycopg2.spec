@@ -6,10 +6,10 @@
 #
 Name     : psycopg2
 Version  : 2.8.4
-Release  : 61
+Release  : 62
 URL      : https://files.pythonhosted.org/packages/84/d7/6a93c99b5ba4d4d22daa3928b983cec66df4536ca50b22ce5dcac65e4e71/psycopg2-2.8.4.tar.gz
 Source0  : https://files.pythonhosted.org/packages/84/d7/6a93c99b5ba4d4d22daa3928b983cec66df4536ca50b22ce5dcac65e4e71/psycopg2-2.8.4.tar.gz
-Source1 : https://files.pythonhosted.org/packages/84/d7/6a93c99b5ba4d4d22daa3928b983cec66df4536ca50b22ce5dcac65e4e71/psycopg2-2.8.4.tar.gz.asc
+Source1  : https://files.pythonhosted.org/packages/84/d7/6a93c99b5ba4d4d22daa3928b983cec66df4536ca50b22ce5dcac65e4e71/psycopg2-2.8.4.tar.gz.asc
 Summary  : psycopg2 - Python-PostgreSQL Database Adapter
 Group    : Development/Tools
 License  : LGPL-3.0 ZPL-2.0
@@ -50,6 +50,7 @@ python components for the psycopg2 package.
 Summary: python3 components for the psycopg2 package.
 Group: Default
 Requires: python3-core
+Provides: pypi(psycopg2)
 
 %description python3
 python3 components for the psycopg2 package.
@@ -57,13 +58,14 @@ python3 components for the psycopg2 package.
 
 %prep
 %setup -q -n psycopg2-2.8.4
+cd %{_builddir}/psycopg2-2.8.4
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571676295
+export SOURCE_DATE_EPOCH=1583203893
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
