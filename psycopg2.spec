@@ -5,21 +5,20 @@
 # Source0 file verified with key 0x6013BD3AFCF957DE (daniele.varrazzo@gmail.com)
 #
 Name     : psycopg2
-Version  : 2.8.4
-Release  : 62
-URL      : https://files.pythonhosted.org/packages/84/d7/6a93c99b5ba4d4d22daa3928b983cec66df4536ca50b22ce5dcac65e4e71/psycopg2-2.8.4.tar.gz
-Source0  : https://files.pythonhosted.org/packages/84/d7/6a93c99b5ba4d4d22daa3928b983cec66df4536ca50b22ce5dcac65e4e71/psycopg2-2.8.4.tar.gz
-Source1  : https://files.pythonhosted.org/packages/84/d7/6a93c99b5ba4d4d22daa3928b983cec66df4536ca50b22ce5dcac65e4e71/psycopg2-2.8.4.tar.gz.asc
+Version  : 2.8.5
+Release  : 63
+URL      : https://files.pythonhosted.org/packages/a8/8f/1c5690eebf148d1d1554fc00ccf9101e134636553dbb75bdfef4f85d7647/psycopg2-2.8.5.tar.gz
+Source0  : https://files.pythonhosted.org/packages/a8/8f/1c5690eebf148d1d1554fc00ccf9101e134636553dbb75bdfef4f85d7647/psycopg2-2.8.5.tar.gz
+Source1  : https://files.pythonhosted.org/packages/a8/8f/1c5690eebf148d1d1554fc00ccf9101e134636553dbb75bdfef4f85d7647/psycopg2-2.8.5.tar.gz.asc
 Summary  : psycopg2 - Python-PostgreSQL Database Adapter
 Group    : Development/Tools
-License  : LGPL-3.0 ZPL-2.0
+License  : LGPL-3.0
 Requires: psycopg2-license = %{version}-%{release}
 Requires: psycopg2-python = %{version}-%{release}
 Requires: psycopg2-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 BuildRequires : postgresql-dev
 BuildRequires : python3-dev
-BuildRequires : util-linux
 
 %description
 How to build psycopg documentation
@@ -57,15 +56,15 @@ python3 components for the psycopg2 package.
 
 
 %prep
-%setup -q -n psycopg2-2.8.4
-cd %{_builddir}/psycopg2-2.8.4
+%setup -q -n psycopg2-2.8.5
+cd %{_builddir}/psycopg2-2.8.5
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583203893
+export SOURCE_DATE_EPOCH=1586274426
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
@@ -82,8 +81,8 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/psycopg2
-cp %{_builddir}/psycopg2-2.8.4/LICENSE %{buildroot}/usr/share/package-licenses/psycopg2/8962684fea8c5eca411c030d957afd571d2069a1
-cp %{_builddir}/psycopg2-2.8.4/doc/COPYING.LESSER %{buildroot}/usr/share/package-licenses/psycopg2/e203d4ef09d404fa5c03cf6590e44231665be689
+cp %{_builddir}/psycopg2-2.8.5/LICENSE %{buildroot}/usr/share/package-licenses/psycopg2/8962684fea8c5eca411c030d957afd571d2069a1
+cp %{_builddir}/psycopg2-2.8.5/doc/COPYING.LESSER %{buildroot}/usr/share/package-licenses/psycopg2/e203d4ef09d404fa5c03cf6590e44231665be689
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
