@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x6013BD3AFCF957DE (daniele.varrazzo@gmail.com)
 #
 Name     : psycopg2
-Version  : 2.8.6
-Release  : 72
-URL      : https://files.pythonhosted.org/packages/fd/ae/98cb7a0cbb1d748ee547b058b14604bd0e9bf285a8e0cc5d148f8a8a952e/psycopg2-2.8.6.tar.gz
-Source0  : https://files.pythonhosted.org/packages/fd/ae/98cb7a0cbb1d748ee547b058b14604bd0e9bf285a8e0cc5d148f8a8a952e/psycopg2-2.8.6.tar.gz
-Source1  : https://files.pythonhosted.org/packages/fd/ae/98cb7a0cbb1d748ee547b058b14604bd0e9bf285a8e0cc5d148f8a8a952e/psycopg2-2.8.6.tar.gz.asc
+Version  : 2.9.1
+Release  : 73
+URL      : https://files.pythonhosted.org/packages/aa/8a/7c80e7e44fb1b4277e89bd9ca509aefdd4dd1b2c547c6f293afe9f7ffd04/psycopg2-2.9.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/aa/8a/7c80e7e44fb1b4277e89bd9ca509aefdd4dd1b2c547c6f293afe9f7ffd04/psycopg2-2.9.1.tar.gz
+Source1  : https://files.pythonhosted.org/packages/aa/8a/7c80e7e44fb1b4277e89bd9ca509aefdd4dd1b2c547c6f293afe9f7ffd04/psycopg2-2.9.1.tar.gz.asc
 Summary  : psycopg2 - Python-PostgreSQL Database Adapter
 Group    : Development/Tools
 License  : LGPL-3.0
@@ -70,15 +70,15 @@ python3 components for the psycopg2 package.
 
 
 %prep
-%setup -q -n psycopg2-2.8.6
-cd %{_builddir}/psycopg2-2.8.6
+%setup -q -n psycopg2-2.9.1
+cd %{_builddir}/psycopg2-2.9.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1599605987
+export SOURCE_DATE_EPOCH=1623940870
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -94,8 +94,8 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/psycopg2
-cp %{_builddir}/psycopg2-2.8.6/LICENSE %{buildroot}/usr/share/package-licenses/psycopg2/8962684fea8c5eca411c030d957afd571d2069a1
-cp %{_builddir}/psycopg2-2.8.6/doc/COPYING.LESSER %{buildroot}/usr/share/package-licenses/psycopg2/e203d4ef09d404fa5c03cf6590e44231665be689
+cp %{_builddir}/psycopg2-2.9.1/LICENSE %{buildroot}/usr/share/package-licenses/psycopg2/8962684fea8c5eca411c030d957afd571d2069a1
+cp %{_builddir}/psycopg2-2.9.1/doc/COPYING.LESSER %{buildroot}/usr/share/package-licenses/psycopg2/e203d4ef09d404fa5c03cf6590e44231665be689
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
